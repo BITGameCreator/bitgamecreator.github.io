@@ -8,10 +8,10 @@ $(function() {
     var first = 1;
     var positions = {
         '0': 0,
-        '1': 194,
-        '2': 388,
-        '3': 582,
-        '4': 776
+        '1': 220,
+        '2': 440,
+        '3': 680,
+        //'4': 800
     }
     var $categories = $('#categories');
     /**
@@ -27,20 +27,20 @@ $(function() {
     /**
      * move the first 5 categories to the viewport
      */
-    $categories.children('li:lt(5)').each(function(i) {
+    $categories.children('li:lt(4)').each(function(i) {
         var $elem = $(this);
         $elem.animate({
             'left': positions[i] + 'px',
             'opacity': 1
-        }, 800, function() {
-            if (elems > 5) enableNavRight();
+        }, 1000, function() {
+            if (elems > 4) enableNavRight();
         });
     });
     /**
      * next category
      */
     $slider.find('.next').bind('click', function() {
-        if (!$categories.children('li:nth-child(' + parseInt(first + 5) + ')').length || !navR) return;
+        if (!$categories.children('li:nth-child(' + parseInt(first + 4) + ')').length || !navR) return;
         disableNavRight();
         disableNavLeft();
         moveRight();
@@ -51,27 +51,27 @@ $(function() {
      * slides in, to fill the space of the first one
      */
     function moveRight() {
-            var hiddenLeft = $categories.offset().left + 163;
+            var hiddenLeft = $categories.offset().left + 220;
             var cnt = 0;
             $categories.children('li:nth-child(' + first + ')').animate({
                 'left': -hiddenLeft + 'px',
                 'opacity': 0
             }, 500, function() {
                 var $this = $(this);
-                $categories.children('li').slice(first, parseInt(first + 4)).each(function(i) {
+                $categories.children('li').slice(first, parseInt(first + 3)).each(function(i) {
                     var $elem = $(this);
                     $elem.animate({
                         'left': positions[i] + 'px'
                     }, 800, function() {
                         ++cnt;
-                        if (cnt == 4) {
-                            $categories.children('li:nth-child(' + parseInt(first + 5) + ')').animate({
+                        if (cnt == 3) {
+                            $categories.children('li:nth-child(' + parseInt(first + 4) + ')').animate({
                                 'left': positions[cnt] + 'px',
                                 'opacity': 1
                             }, 500, function() {
                                 //$this.hide();
                                 ++first;
-                                if (parseInt(first + 4) < elems) enableNavRight();
+                                if (parseInt(first + 3) < elems) enableNavRight();
                                 enableNavLeft();
                             });
                         }
@@ -96,20 +96,20 @@ $(function() {
     function moveLeft() {
             var hiddenRight = $(window).width() - $categories.offset().left;
             var cnt = 0;
-            var last = first + 4;
+            var last = first + 3;
             $categories.children('li:nth-child(' + last + ')').animate({
                 'left': hiddenRight + 'px',
                 'opacity': 0
             }, 500, function() {
                 var $this = $(this);
-                $categories.children('li').slice(parseInt(last - 5), parseInt(last - 1)).each(function(i) {
+                $categories.children('li').slice(parseInt(last - 4), parseInt(last-1)).each(function(i) {
                     var $elem = $(this);
                     $elem.animate({
                         'left': positions[i + 1] + 'px'
                     }, 800, function() {
                         ++cnt;
-                        if (cnt == 4) {
-                            $categories.children('li:nth-child(' + parseInt(last - 5) + ')').animate({
+                        if (cnt == 3) {
+                            $categories.children('li:nth-child(' + parseInt(last - 4) + ')').animate({
                                 'left': positions[0] + 'px',
                                 'opacity': 1
                             }, 500, function() {
