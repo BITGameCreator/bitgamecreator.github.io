@@ -36,6 +36,7 @@ $(document).ready(function () {
 </script>
 <!-- / tabs -->
 <script type="text/javascript" src="layout/scripts/jquery-photostack.js"></script>
+<script type="text/javascript" src="layout/scripts/jquery-photostackfatin.js"></script>
 <!-- coinslider -->
 <script type="text/javascript" src="layout/scripts/jquery-coin-slider.min.js"></script>
 <script type="text/javascript">
@@ -61,7 +62,7 @@ $(document).ready(function () {
 	  
     </div>
   </div>
-</div>
+
 <!-- ####################################################################################################### -->
 <div class="wrapper col1">
   <div id="topbar" class="clear">
@@ -110,13 +111,21 @@ $(document).ready(function () {
     </ul>
   </div>
 </div>
+
 <!-- ####################################################################################################### -->
 <div class="wrapper col1">
-  <div id="featured_slide"> 
-  <h2>ゲーム一覧</h2>
+ <div id="container" class="clear">
+  <h1>ゲーム一覧</h1>
+  
   <p style="font-size:15px"> 「やってみる」を押すとブラウザー上でゲームができるサイトに飛びます。３Dのゲームの場合、強いインターネットの線とＣＰＵのスペックが必要になります。</p>
   <p style="font-size:15px">「ダウンロード」を押すと.zip形式でゲームが実行できるファイルをダウンロードできます。</p>
+  </div>
+
+  <div id="featured_slide"> 
+
     <!-- ####################################################################################################### -->
+    <h2>チーム制作</h2>
+
     <div id="slider">
       <ul id="categories">
         <li class="category">
@@ -187,14 +196,71 @@ $(document).ready(function () {
       </ul>
       <a class="prev disabled"></a> <a class="next disabled"></a>
       <div style="clear:both"></div>
-    </div>
-    <!-- ####################################################################################################### --> 
+
   </div>
+  <div id="featured_slidefatin"> 
+    <h2>個人制作</h2>
+    <div id="slider2">
+      <ul id="categories2">
+        <li class="category">
+          <h2>3D:スペースシューター</h2>
+          <a href="#"><img src="images/gameScreen/spaceshooter.png" alt="" /></a>
+          <p>機体を動かして、敵機を撃って落とす。後で出てくるボスを倒したら勝ち！</p>
+          <p class="readmore"><a href="https://simmer.io/@BITGame/space-fighter">やってみる&raquo;</a></p>
+		  		  <p class="readmore"><a href="gameDownload/SpaceShooter3D.zip" >　ダウンロード &raquo;</a></p>
+
+        </li>
+        <li class="category">
+          <h2>2D:ブラックジャック</h2>
+          <a href="#"><img src="images/gameScreen/blackjack.png" alt="" /></a>
+          <p>ブラックジャックのカードゲーム。ベットをすることも可能！</p>
+          <p class="readmore"><a href="https://simmer.io/@BITGame/blackjack">やってみる &raquo;</a></p>
+		  <p class="readmore"><a href="gameDownload/BlackJack.zip" >　ダウンロード &raquo;</a></p>
+        </li>
+        <li class="category">
+          <h2>2D:タイムアタック</h2>
+          <a href="#"><img src="images/gameScreen/timeattack.png" alt="" /></a>
+          <p>どれぐらい速くゴールまでたどり着けるか？敵に当たったらノックバックされ、時間ロス！ジャンプして、壁に掴んで進みましょう！</p>
+		  <p class="readmore"><a href="gameDownload/TimeAttack.zip" >　ダウンロード &raquo;</a></p>
+
+        </li>
+        <li class="category">
+          <h2>2D:廃病院のフタリ </h2>
+          <a href="#"><img src="images/gameScreen/haibyouin00.png" alt="" /></a>
+		  
+          <p>主人公と2人の友達のお話</p>
+          <p class="readmore"><a href="https://simmer.io/@BITGame/haibyouinnofutari">やってみる &raquo;</a></p>
+		  <p class="readmore"><a href="gameDownload/HaibyouinNoFutari.zip" >　ダウンロード &raquo;</a></p>
+
+        </li>
+        <li class="category">
+          <h2>3D: FPS チーム１　USYO　</h2>
+          <a href="#"><img src="images/gameScreen/fpsusyo.png" alt="" /></a>
+          <p>Unityのベースプロジェクトを素に、追加したい機能や要素などを実装しました。このチームは武器の種類の実装中心に制作をしました。特に時間式爆弾に力を入れました。※バグで壁、床のところどころすり抜けて落ちる場合がございます。</p>
+		  <p></p>
+          <p class="readmore"><a href="https://simmer.io/@BITGame/fps-team-1-usyo">　やってみる &raquo;</a></p>
+          <p class="readmore"><a href="gameDownload/PCBuildFPSUSYO.zip" >　ダウンロード &raquo;</a></p>
+		</li>
+		
+        <li class="category">
+          <h2>3D: FPS チーム２ IKSH</h2>
+          <a href="#"><img src="images/gameScreen/fpsiksh.png" alt="" /></a>
+          <p>Unityのベースプロジェクトを素に、追加したい機能や要素などを実装しました。このチームはアイテムと敵の種類の実装を中心に制作しました。速くなるアイテム、攻撃アップアイテムなどがあります。敵の種類も複数あり、その中でも一番むかつくのは無限わきする敵です！解放感があるマップで敵を倒しましょう！</p>
+             <p class="readmore"><a href="https://simmer.io/@BITGame/fps-team-2-iksh">　やってみる &raquo;</a></p>
+          <p class="readmore"><a href="https://drive.google.com/file/d/18lBfYxiR1I5-VDM8-GGz3Hv3rNW3SPsw/view?usp=sharing" >　ダウンロード &raquo;</a></p>
+		
+        </li>
+      </ul>
+      <a class="prev disabled"></a> <a class="next disabled"></a>
+      <div style="clear:both"></div>
+    </div>
+  </div>
+</div> 
+
 </div>
+<!-- #######################################################################################################  -->
 
-<!-- ######## -->
-
-  <div id="footer">
+ <div id="footer">
    <div class="diversion">
       <h2>BITのゲームクリエイター専攻について</h2>
       <h3>ゲームプランナー、ゲームデザイナー、ゲームプログラマーになるためにカリキュラムを用意しています。</h3>
@@ -208,13 +274,13 @@ $(document).ready(function () {
     </div>
 
 </div>
-<!-- ####################################################################################################### -->
+
 
   <div id="copyright" class="clear">
     <p class="fl_left">Copyright &copy; 2021 - All Rights Reserved - <a href="#">BitGameCreator</a></p>
     <p class="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
   </div>
-</div>
-
+ 
+	
 </body>
 </html>

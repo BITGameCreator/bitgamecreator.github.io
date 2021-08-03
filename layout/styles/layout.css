@@ -13,6 +13,7 @@ File: Layout CSS
 @import url("tables.css");
 @import url("homepage.css");
 @import url("featured_slide.css");
+@import url("featured_slidefatin.css");
 @import url("gallery.css");
 @import url("portfolio.css");
 
@@ -126,12 +127,12 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 
 /* ----------------------------------------------Footer------------------------------------- */
 
-#footer{padding:20px 0;}
+#footer{padding:5px 0;}
 #footer h2, #footer p, #footer ul, #footer a{margin:0; padding:0; font-weight:normal; list-style:none; line-height:1.6em; font-style:normal;}
 #footer, #footer a{color:#666666; background-color:#161616;}
 #footer .footbox{display:block; float:left; width:225px; margin:0 20px 0 0; padding:0;}
-#footer h2{margin-bottom:20px; font-size:26px; font-style:italic;}
-#footer p{margin-bottom:10px;}
+#footer h2{margin-bottom:2px; font-size:26px; font-style:italic;}
+#footer p{margin-bottom:1px;}
 #footer li{margin:0 0 5px 0; padding:0 0 5px 0; border-bottom:1px solid #333333;}
 #footer li strong.title{font-size:12px; font-weight:bold; text-transform:uppercase;}
 #footer .last{margin:0;}
