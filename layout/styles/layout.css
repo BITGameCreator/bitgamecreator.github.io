@@ -64,7 +64,7 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 
 /* ----------------------------------------------Content------------------------------------- */
 
-#container{padding:30px 0;}
+#container{padding:20px 0;}
 #container a{color:#0BBDB3; background-color:#F9F9F9;}
 #content{display:block; float:left; width:630px;}
 
@@ -127,7 +127,7 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 
 /* ----------------------------------------------Footer------------------------------------- */
 
-#footer{padding:5px 0;}
+#footer{padding:1px 0;}
 #footer h2, #footer p, #footer ul, #footer a{margin:0; padding:0; font-weight:normal; list-style:none; line-height:1.6em; font-style:normal;}
 #footer, #footer a{color:#666666; background-color:#161616;}
 #footer .footbox{display:block; float:left; width:225px; margin:0 20px 0 0; padding:0;}
