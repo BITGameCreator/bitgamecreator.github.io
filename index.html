@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIT GAME STATION</title>
+<link rel="icon" href="images/demo/bitchan01.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EEF1F6;
+    --ink:#181A2A;
+    --ink-soft:#4A4E63;
+    --navy:#14162A;
+    --violet:#4C3BCF;
+    --violet-soft:#EDEAFB;
+    --coral:#FF6B4A;
+    --coral-dark:#E4502F;
+    --line:#DCE0EA;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans JP',sans-serif;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Zen Kaku Gothic New',sans-serif;letter-spacing:.01em;margin:0;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  nav{position:sticky;top:0;z-index:30;background:var(--navy);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);flex-wrap:wrap;gap:10px;}
+  .logo{color:#fff;font-weight:900;font-size:19px;display:flex;align-items:center;gap:10px;font-family:'Zen Kaku Gothic New',sans-serif;}
+  .logo .dot{width:12px;height:12px;background:var(--coral);border-radius:3px;display:inline-block;}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;}
+  .tab{color:#B8BBD6;background:transparent;border:none;padding:9px 15px;border-radius:9px;font-size:13.5px;font-weight:500;cursor:pointer;transition:.15s;font-family:'Noto Sans JP',sans-serif;}
+  .tab.active{background:var(--violet);color:#fff;}
+  .tab:hover:not(.active){background:rgba(255,255,255,.08);color:#fff;}
+
+  .hero{background:var(--navy);color:#fff;padding:56px 32px 44px;position:relative;overflow:hidden;}
+  .hero::after{content:"";position:absolute;right:-60px;top:-60px;width:300px;height:300px;background:repeating-linear-gradient(45deg,var(--violet) 0 3px,transparent 3px 22px);opacity:.15;border-radius:40px;transform:rotate(12deg);}
+  .hero-inner{max-width:820px;position:relative;}
+  .eyebrow{color:var(--coral);font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.1em;margin-bottom:14px;}
+  .hero h1{font-size:34px;line-height:1.4;margin-bottom:14px;font-weight:900;}
+  .hero p{color:#C4C7E0;font-size:14.5px;line-height:1.9;max-width:640px;margin:0 0 12px;}
+  .hero p.warn{color:var(--coral);font-weight:500;}
+  .stat-row{display:flex;gap:32px;margin-top:22px;flex-wrap:wrap;}
+  .stat b{display:block;font-family:'Zen Kaku Gothic New',sans-serif;font-size:24px;}
+  .stat span{font-size:11.5px;color:#9296B8;font-family:'JetBrains Mono',monospace;}
+
+  .timeline-wrap{background:#fff;padding:22px 32px;border-bottom:1px solid var(--line);}
+  .timeline{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;}
+  .step{flex:1;text-align:center;position:relative;padding:0 6px;}
+  .step .n{width:28px;height:28px;border-radius:50%;background:var(--violet);color:#fff;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12.5px;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;}
+  .step p{margin:0;font-size:12px;color:var(--ink-soft);line-height:1.5;}
+  .step::before{content:"";position:absolute;top:14px;left:-50%;width:100%;height:2px;background:var(--line);z-index:-1;}
+  .step:first-child::before{display:none;}
+
+  .filters{max-width:1200px;margin:26px auto 0;padding:0 32px;display:flex;gap:8px;flex-wrap:wrap;}
+  .chip{padding:7px 14px;border-radius:20px;font-size:13px;border:1px solid var(--line);background:#fff;color:var(--ink-soft);cursor:pointer;user-select:none;}
+  .chip.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+  .section-title{max-width:1200px;margin:34px auto 4px;padding:0 32px;display:flex;align-items:baseline;gap:10px;}
+  .section-title h2{font-size:19px;}
+  .section-title span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-soft);}
+  .grid{max-width:1200px;margin:0 auto;padding:14px 32px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;}
+  .empty-msg{max-width:1200px;margin:0 auto;padding:14px 32px 40px;color:var(--ink-soft);font-size:14px;}
+
+  .card{background:#fff;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);transition:transform .16s ease,box-shadow .16s ease;display:flex;flex-direction:column;}
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(20,22,42,.12);}
+  .thumb{height:140px;position:relative;background-size:cover;background-position:center;display:flex;align-items:flex-end;}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .thumb .badge{position:absolute;top:9px;left:9px;background:rgba(20,22,42,.72);color:#fff;font-size:10.5px;padding:4px 9px;border-radius:20px;font-family:'JetBrains Mono',monospace;}
+  .card-body{padding:15px 15px 16px;display:flex;flex-direction:column;gap:7px;flex:1;}
+  .card-body h3{font-size:15.5px;}
+  .card-body p.desc{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.6;flex:1;}
+  .meta{display:flex;gap:9px;font-size:11px;color:#8A8EA8;font-family:'JetBrains Mono',monospace;flex-wrap:wrap;}
+  .btn-row{display:flex;gap:8px;margin-top:4px;}
+  .btn{flex:1;text-align:center;padding:8px 0;border-radius:9px;font-size:12.5px;font-weight:500;text-decoration:none;cursor:pointer;border:none;}
+  .btn-play{background:var(--coral);color:#fff;}
+  .btn-play:hover{background:var(--coral-dark);}
+  .btn-dl{background:#fff;color:var(--ink);border:1px solid var(--line);}
+  .btn-dl:hover{border-color:var(--ink);}
+
+  footer{background:var(--navy);color:#B8BBD6;padding:34px 32px;font-size:13px;line-height:1.9;}
+  footer a{color:#fff;}
+  footer h3{color:#fff;font-size:16px;margin-bottom:10px;}
+
+  @media (max-width:640px){
+    .hero h1{font-size:26px;}
+    nav{padding:12px 18px;}
+    .grid,.section-title,.filters,.timeline{padding-left:18px;padding-right:18px;}
+    .timeline{flex-wrap:wrap;}
+    .step{flex:0 0 50%;margin-bottom:14px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><span class="dot"></span>BIT GAME STATION</div>
+  <div class="tabs" id="catTabs">
+    <button class="tab active" data-cat="all">すべて</button>
+    <button class="tab" data-cat="grad">卒業制作</button>
+    <button class="tab" data-cat="team">チーム制作</button>
+    <button class="tab" data-cat="solo">ソロ制作</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">富山情報ビジネス専門学校 &middot; ゲームクリエイター専攻</div>
+    <h1>学生が作ったゲーム、<br>ブラウザですぐ遊べます。</h1>
+    <p>「やってみる」を押すとブラウザー上でゲームができます（3Dゲームは強めの回線とCPUスペックが必要です）。「ダウンロード」は.zip形式の実行ファイルです。展開してゲームタイトル.exeを実行してください。</p>
+    <p class="warn">お願い：ゲームを終了するときはWindowsボタン→Unityアイコンを右クリック→「ウインドウを閉じる」を選んでください。</p>
+    <div class="stat-row">
+      <div class="stat"><b id="statTotal">0</b><span>公開作品数</span></div>
+      <div class="stat"><b>4</b><span>制作カテゴリ</span></div>
+      <div class="stat"><b>2020–24</b><span>年度</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="timeline-wrap">
+  <div class="timeline">
+    <div class="step"><div class="n">1</div><p>1年生前期<br>ソロ制作（2D）</p></div>
+    <div class="step"><div class="n">2</div><p>1年生後期<br>ソロ制作（3D）</p></div>
+    <div class="step"><div class="n">3</div><p>2年生<br>チーム制作</p></div>
+    <div class="step"><div class="n">4</div><p>2年生<br>卒業制作</p></div>
+  </div>
+</div>
+
+<div class="filters" id="genreFilters"></div>
+
+<div id="results"></div>
+
+<footer>
+  <h3>Bitのゲームクリエイター専攻について</h3>
+  富山県射水市にある、富山情報ビジネス専門学校（通称Bit）。ゲームクリエイターの育成に力を入れています。カリキュラムの確認はBitの<a href="https://www.bit.urayama.ac.jp/" target="_blank" rel="noopener noreferrer">ホームページ</a>でご覧いただけます。<br><br>
+  電話番号：0766-55-1420（ゲームクリエイター専攻教員ファティンまでお願いします）<br>
+  メール：a-fatin@urayama.ac.jp<br>
+  更新：2024年11月27日<br><br>
+  Copyright &copy; 2021 - All Rights Reserved - BitGameCreator
+</footer>
+
+<script>
+/* category: grad / team3d / team2d / solo3d / solo2d
+   fields: [title, category, genre, year, desc, img, playUrl, dlUrl, size] */
+const GAMES = [
+// ---- 卒業制作 ----
+["いみず雫のライバー生活","grad","シミュレーション","2023","射水市活性化のためにVtuberいみず雫ちゃんが自分磨きをして頑張ります！","images/gameScreen/SizukuLiverSeikatsu.png","","https://drive.google.com/file/d/1ANjCvXjpvch1V5QI8BlxRCtH6DJhVuk8/view?usp=sharing","56.3MB"],
+["いみずしずくのファッションショー!","grad","シミュレーション","2023","Vtuberいみず雫は人気者になるためにファッションショーに出ます！","images/gameScreen/SizukuFashion.png","","https://drive.google.com/file/d/1_rHD2Uqpu1dbXmi75iLPHzSskBtdcaEQ/view?usp=sharing","47.5MB"],
+["いみず雫新聞～新聞始めました～","grad","ボードゲーム","2023","射水市の新聞作成のためにVtuber雫ちゃんはネタを求める！","images/gameScreen/SizukuNewspaper.png","","https://drive.google.com/file/d/1K5RxFNUxCZ9dXPIAsM41RP3dkKjHg5Ld/view?usp=sharing","58.5MB"],
+["キララかしずくナビ","grad","シミュレーション","2023","Vtuberいみず雫に誘われてあなたは射水市を回ることになった！","images/gameScreen/SizukuNavi.png","","https://drive.google.com/file/d/1geoGqlVSohWMfiTRLM_4Tv3DYnyJhWgN/view?usp=sharing","120.4MB"],
+["いみず雫のワクワク射水市クイズ","grad","クイズ","2023","射水市クイズ！あなたは全部正解できますか？","images/gameScreen/ImizuQuiz.png","","https://drive.google.com/file/d/1zfdbHBpTcBXeRuUmBlAM6nxj2VmiWjdE/view?usp=sharing","35.9MB"],
+["Sizuku Racing","grad","レーシング","2022","Vtuberいみず雫は人気者になるためにレースに出るってよ！","images/gameScreen/SizukuRacing.png","","https://drive.google.com/file/d/1k1MMoxxLnQ5jvJKR5YXZlo5FEIg06HD9/view?usp=share_link","176.1MB"],
+["ブルーライバー","grad","シミュレーション","2022","Vtuberいみず雫のマネージャーとして彼女の射水市のPR活動をサポートしましょう！","images/gameScreen/BlueLiver.png","","https://drive.google.com/file/d/1R_1MKtRN6CjD5kamV_N4KJ1d5T4ZlPLv/view?usp=sharing","96.7MB"],
+["射水雫市長になります！","grad","2Dアクション","2022","特産品が暴れまわっている！市長いみず雫、なんとかしてください！","images/gameScreen/Shichou.png","","https://drive.google.com/file/d/1JosV9K0Sz1T8jtKMUJCO53Gz1f-5S58n/view?usp=sharing","33.5MB"],
+["富山クエスト","grad","RPG","2021","富山県は魔王に支配されてしまった！ヒーローキトキトクンとその仲間たちに運命が託された。","images/gameScreen/tq.png","","https://drive.google.com/file/d/1rNerfJBywTIUK50trglaWLOyhLc_Vp2w/view?usp=sharing","98.5MB"],
+
+// ---- チーム制作 3D ----
+["City Escape","team3d","シューティング","2022","攻撃してくる敵から逃げ延びたり、倒したりして、街から脱出しろ！（2年生作品）","images/gameScreen/CityEscape.png","","https://drive.google.com/file/d/1E8P0b1EhoBd6dKd5EqrQ5duJN-Q68KOO/view?usp=drive_link",""],
+["スペースシューター","team3d","シューティング","2020","機体を動かして、敵機を撃って落とす。ボスを倒したら勝ち！（2年生作品）","images/gameScreen/spaceshooter.png","https://simmer.io/@BITGame/space-fighter","gameDownload/SpaceShooter3D.zip",""],
+["FPS チーム１ USYO","team3d","シューティング","2020","武器の種類の実装を中心に制作。時間式爆弾に力を入れました（2年生作品）","images/gameScreen/fpsusyo.png","https://simmer.io/@BITGame/fps-team-1-usyo","gameDownload/PCBuildFPSUSYO.zip",""],
+["FPS チーム２ IKSH","team3d","シューティング","2020","アイテムと敵の種類の実装を中心に制作。無限湧きする敵に注意（2年生作品）","images/gameScreen/fpsiksh.png","https://simmer.io/@BITGame/fps-team-2-iksh","https://drive.google.com/file/d/18lBfYxiR1I5-VDM8-GGz3Hv3rNW3SPsw/view?usp=sharing",""],
+
+// ---- チーム制作 2D ----
+["ChargeMan","team2d","横アクション","2024","チャージ弾で敵を倒し、不思議な世界を探索するゲームです（1年生作品）","images/gameScreen/ChargeMan.png","","https://drive.google.com/file/d/1IvRZnMgrDIMLsKYWHLnnZHSGbR9UAWVS/view?usp=sharing",""],
+["とやまげーむ","team2d","パーティゲーム","2024","同じ形の村・町・市をくっつけて富山県を作ろう！（1年生作品）","images/gameScreen/ToyamaGame.png","","https://drive.google.com/file/d/1MShXlxGiJH8Ar94zxa2R6o5JH4UE6wHV/view?usp=sharing",""],
+["ブラックジャック","team2d","カードゲーム","2020","ブラックジャックのカードゲーム。ベットをすることも可能！（1年生作品）","images/gameScreen/blackjack.png","https://simmer.io/@BITGame/blackjack","gameDownload/BlackJack.zip",""],
+["タイムアタック","team2d","横スクロールアクション","2020","どれぐらい速くゴールまでたどり着けるか？壁に掴んで進もう（1年生作品）","images/gameScreen/timeattack.png","","gameDownload/TimeAttack.zip",""],
+["廃病院のフタリ","team2d","ノベル","2020","主人公と2人の友達のお話（1年生作品）","images/gameScreen/haibyouin00.png","https://simmer.io/@BITGame/haibyouinnofutari","gameDownload/HaibyouinNoFutari.zip",""],
+
+// ---- ソロ制作 3D ----
+["Eagle Adventure","solo3d","なぞどき","2024","鷹を操作して自由にマップを飛び回るゲームです（1年生作品）","images/gameScreen/EagleAdventure.png","https://unityroom.com/games/bit-eagleadventure","",""],
+["黒き主の箱庭世界","solo3d","バトルアクション","2024","刀を使ったアクロバティックなアクションで敵を倒していくゲームです！（1年生作品）","images/gameScreen/hakoniwa.png","","",""],
+["どろぼうねこ","solo3d","脱出","2024","人間に見つからないように宝石を盗んで脱出！（1年生作品）","images/gameScreen/Dorobouneko.png","https://unityroom.com/games/bit-dorobouneko","",""],
+["Robot Shooter","solo3d","シューティング","2024","ロボットの戦い（1年生作品）","images/gameScreen/robotshooter.png","https://unityroom.com/games/bit-robotshooter","",""],
+["Crush","solo3d","カジュアル","2024","いかに壁に当たらずにゴールを目指せるかというゲームです！（1年生作品）","images/gameScreen/Crush.png","https://unityroom.com/games/bit-crush","",""],
+["PCubes","solo3d","パズルアクション","2023","ブロックを使ってゴールを目指せ！！（1年生作品）","images/gameScreen/PCubes.png","","https://drive.google.com/file/d/11jSBeDIZx-0lEv1GniVkqRZM0jUZloIB/view?usp=sharing","35.9MB"],
+["I wanna eat watermelon","solo3d","アクションゲーム","2023","プレイヤーがスイカを操作してゴールの皿を目指そう（1年生作品）","images/gameScreen/IWannaEatWatermelon.png","https://simmer.io/@BITGame/i-wanna-eat-watermelon","",""],
+["スピード レース","solo3d","レーシング","2023","CPUと対決して１位を目指そう！（1年生作品）","images/gameScreen/SpeedRace.png","https://simmer.io/@BITGame/speed-race","",""],
+["Collect Color","solo3d","アクションゲーム","2023","バケツを操作してステージを攻略。隠しまんぼうを探してみて（1年生作品）","images/gameScreen/CollectColor.png","https://simmer.io/@BITGame/collectcolor","",""],
+["Gensokyou The Last Incident Three Egyptian Gods 3D","solo3d","弾幕シューティングゲーム","2023","弾幕シューティングを3Dで制作。立体の弾幕を避けて敵やボスを倒そう（1年生作品）","images/gameScreen/TheLastIncident.png","https://simmer.io/@BITGame/gensokyou-the-last-incident-three-egyptian-gods-3d","",""],
+["Trinity Animals","solo3d","アクション","2023","三匹の動物たちがゴールを目指す!!スキルを駆使して道を切り開こう（1年生作品）","images/gameScreen/TrinityAnimals.png","","https://drive.google.com/file/d/1XOF4yb_TTvn9ukXJPMc8Cpg5SKHpHLiA/view?usp=sharing","35.9MB"],
+["Flying Bird","solo3d","アクション","2023","鳥を操作してリングをくぐりましょう（1年生作品）","images/gameScreen/FlyingBird.png","","https://drive.google.com/file/d/1jYz7IgVQ9hYkFfKapGW_JTk6g2uvmt0u/view?usp=sharing","93.6MB"],
+["Escape Humaroid","solo3d","脱出","2023","鬼に捕まる前に７個のルビーを集めて脱出しよう（1年生作品）","images/gameScreen/EscapeHumanoid.png","","https://drive.google.com/file/d/1WEk6vLYkqqoGpGs0IfGV4mYrZ7hbronj/view?usp=sharing","260.4MB"],
+["Five Nightmare Snowmans","solo3d","ホラー","2023","生き延びるためにそれぞれの雪だるまの対処方法を覚えろ！（1年生作品）","images/gameScreen/FNS.png","","https://drive.google.com/file/d/1YibJIXhtNSUYgu4EeSqtt8IZMkdbny-9/view?usp=sharing","368.7MB"],
+["Wheel of Destroy","solo3d","爆発","2023","爆・発・す・る（1年生作品）","images/gameScreen/WOD.png","","https://drive.google.com/file/d/1kGE1njqG2QOcyH18blUXcDWyf4Qcx0hV/view?usp=sharing","82.8MB"],
+["元勇者の借金返済物語","solo3d","ノベル","2023","タイトル通りの物語です（1年生作品）","images/gameScreen/MotoYuusha.png","","https://drive.google.com/file/d/1BZrsip-OnlQRU4SzC2FdZdCpHpSlHHn4/view?usp=sharing","73.8MB"],
+["ずんだFPS","solo3d","FPS","2023","ずんだもんと一緒に他のボイスロイドたちを倒すゲームになる予定でした（1年生作品）","images/gameScreen/ZFPS.png","","https://drive.google.com/file/d/1H9v8vWlwI0Flwee7WdYyjoOpLi2XM4LX/view?usp=sharing","99.2MB"],
+["Priest","solo3d","ホラー","2023","妙な廃村からの脱出（1年生作品）","images/gameScreen/Priest.png","","https://drive.google.com/file/d/1sjQSrwUrqCfdvf3cNW6rsAn5JOiYifff/view?usp=sharing","605.4MB"],
+["３Dチェス","solo3d","ストラテジー","2022","相手の駒を取れば駒が破壊する普通のチェスゲームです（1年生作品）","images/gameScreen/3DChess.png","","https://drive.google.com/file/d/1K-2WUXbYnRrIFhs9XMrLfh1ZO-0SJNrd/view?usp=sharing",""],
+["Zombie","solo3d","アクション","2021","制限時間内にゾンビを倒してスコアを稼ごう！（1年生作品）","images/gameScreen/Zombie.png","https://simmer.io/@BITGame/zombie","",""],
+["ホラー脱出ゲーム","solo3d","脱出","2021","各部屋のどこかに隠されているカギを見つけて部屋からの脱出を目指そう！（1年生作品）","images/gameScreen/HorrorEscapeGame.png","https://simmer.io/@BITGame/horror-escape-game","",""],
+["TARGET","solo3d","アクション","2021","三人称視点でキャラクターを動かして、ターゲットのボールを集めるゲームです！（1年生作品）","images/gameScreen/target.png","https://simmer.io/@BITGame/target","",""],
+["War of Animals","solo3d","タワーディフェンス","2020","相手のタワーに触れれば勝ち！キャラ出現にはコストが必要です（2年生作品）","images/gameScreen/warofanimals.png","https://simmer.io/@BITGame/war-of-animals","",""],
+["ロープアクション","solo3d","アクション","2020","フック付きチェーンを出してぶらさがってゴールに着地できるか挑戦（2年生作品）","images/gameScreen/ropeaction.png","https://simmer.io/@BITGame/rope-action","",""],
+["マイン〇ラ？ではない","solo3d","サンドボックス","2020","ブロックを壊して、置いて、壊して、置いていくゲームです（2年生作品）","images/gameScreen/minecraft.png","https://simmer.io/@BITGame/minecraftlike","",""],
+["泡シューター","solo3d","アクション","2020","出てくる敵を倒して、次々とステージを進んでいくゲームです（2年生作品）","images/gameScreen/bubbleShooter.png","https://simmer.io/@BITGame/bubble-shooter","",""],
+["ピンボール","solo3d","アーケード","2020","タイムアタック式ピンボールゲームです。時間まで点数いくつぐらい取れる？（2年生作品）","images/gameScreen/pinball.png","https://simmer.io/@BITGame/pinball","",""],
+["Car Attack","solo3d","タイムアタック","2020","ゴールまで何秒かかりますか？（2年生作品）","images/gameScreen/carAttack.png","https://simmer.io/@BITGame/car-attack","",""],
+["Musou","solo3d","アクション","2020","時間内に赤い敵を何人倒せるか挑戦してください！（2年生作品）","images/gameScreen/musou.png","https://simmer.io/@BITGame/musou","",""],
+["ホラーゲーム（仮）","solo3d","ホラー","2020","カギを見つけて、ここから逃げよう！出口は光っているドアです（2年生作品）","images/gameScreen/horrorgamekari.png","","https://drive.google.com/file/d/1iIG2PaaA6lb7jlRih27_edKvg7V707ym/view?usp=sharing",""],
+["PK Game","solo3d","アクション","2020","ゴール視点ペナルティキック！ゴールを止めろ！（2年生作品）","images/gameScreen/pkgame.png","https://simmer.io/@BITGame/pk","",""],
+
+// ---- ソロ制作 2D ----
+["まちばり","solo2d","カジュアル","2024","Spaceキーのみでできるゲーム。はりが重ならないようにさすゲームです（1年生作品）","images/gameScreen/machibari.png","https://simmer.io/@BITGame/machibari","",""],
+["Metallica","solo2d","短いRPG","2024","洞窟に潜り、永遠と出現してくるスライムをかわしながら鉱石を掘り、お宝をゲットしてスコアを稼ぐ（1年生作品）","images/gameScreen/Metallica.png","","https://drive.google.com/file/d/1F-qRGKt10P8H_A5WlKQR4JC39iY_P6mA/view?usp=sharing",""],
+["Witch's Waltz","solo2d","シューティング","2024","敵の攻撃を避け続けて、一度も当たらずに敵を倒すことが目標のゲームです（1年生作品）","images/gameScreen/Witch's Waltz.png","https://simmer.io/@BITGame/witch-s-waltz","",""],
+["DAMOCLES","solo2d","横スクロールシューティング","2024","向かってくる敵たちを様々な武器で倒し、最奥にいるボスを倒そう！（1年生作品）","images/gameScreen/DAMOCLES.png","https://simmer.io/@BITGame/damocles","",""],
+["あぶくになっても","solo2d","なぞどき","2024","短時間で、ギミックを解いたりお話したりできるゲームです（1年生作品）","images/gameScreen/Abukuninattemo.png","","https://drive.google.com/file/d/1xaY__5xMxf36x9KPjF6EXvEzBEHz6x2D/view?usp=sharing",""],
+["スライムの反撃!!!","solo2d","タワーディフェンス","2024","スライムを召喚して、勇者一行を倒していき、敵の城を破壊するゲームです！（1年生作品）","images/gameScreen/SlimenoHangeki!!!.png","https://simmer.io/@BITGame/slimenohangeki","",""],
+["インフィニティラン","solo2d","横スクロール","2024","無限に走り続け、スコアを稼ぐゲームです。隙間時間にプレイできます（1年生作品）","images/gameScreen/インフィニティラン.png","","https://drive.google.com/file/d/1fZG9jbd8NePNzFvd4tdux9v-Gk-eu_IB/view?usp=sharing",""],
+["LAST FIGHT","solo2d","横スクロール","2024","冒険者が森の中を探検し、強敵に立ち向かう横スクロールベルトアクションゲームです（1年生作品）","images/gameScreen/LAST FIGHT.png","https://simmer.io/@BITGame/last-fight","",""],
+["ござるの散歩道","solo2d","横スクロール","2024","横スクロールゲームで、ライフが無くなるまでにより多くのスコアを稼ぐことが目的です（1年生作品）","images/gameScreen/ござるの散歩道.png","https://simmer.io/@BITGame/gozarunosanpodou","",""],
+["GUNSLINGER","solo2d","カジュアル","2024","敵よりも速く左クリックするゲームです（1年生作品）","images/gameScreen/GUNSLINGER.jpg","https://simmer.io/@BITGame/gunslinger","",""],
+["Uni虐","solo2d","横スクロール2Dアクション","2023","敵を倒しながらゴールを目指すゲーム（1年生作品）","images/gameScreen/UniKyou.png","https://simmer.io/@BITGame/unikyou","",""],
+["FOIMU","solo2d","パズルゲーム","2023","指示された形を作って、時間内にクリアしよう！！テトリスもどきもあるよ（1年生作品）","images/gameScreen/FOIMU.png","","https://drive.google.com/file/d/1avNG8VRNwAXFmz1fNqlR819R3cCvJfhG/view?usp=sharing",""],
+["ゾンビサバイバル","solo2d","RPG","2023","建物内のゾンビを倒したり避けたりしながら探索し脱出を目指す（1年生作品）","images/gameScreen/ZombieSurvival.png","","https://drive.google.com/file/d/1MhnrsOOVKbjsjDcwU8o45WxYQJtZwlf_/view?usp=sharing",""],
+["ロードファイター","solo2d","格闘","2023","ごく普通の格闘ゲーム（1年生作品）","images/gameScreen/RoadFighter.png","","https://drive.google.com/file/d/12_E50AT1ccSry-XVcgEQUGUWCom09-mO/view?usp=sharing",""],
+["Clime","solo2d","アクション","2023","初心者でも上級者でも楽しめるように難易度調整に力を入れました。タイムアタックも可能（1年生作品）","images/gameScreen/Clime.png","","https://drive.google.com/file/d/1gnn1iDNrPmSrFWMtjhpmOFleZYiLUS2r/view?usp=sharing",""],
+["Mangenkyou Craft","solo2d","サンドボックス","2023","好きなマインクラフトを作成。三幻神を倒してゲームをクリアしよう（1年生作品）","images/gameScreen/Mangenkyou.png","","https://drive.google.com/file/d/150dHdEQuTD-NzwNDtN8gthXHi2sGX-Tg/view?usp=sharing",""],
+["Fantasy Traveller","solo2d","横スクロールアクション","2023","アイテムを使いながら、モンスターの住む世界を横スクロールで進んでいこう！全3ステージ（1年生作品）","images/gameScreen/FantasyTraveller.png","","https://drive.google.com/file/d/1wKTJSKMHmIIxTmKyZNS0CgUY7Nf7g-2p/view?usp=sharing",""],
+["ゲキムズダンジョン","solo2d","アドベンチャーRPG","2023","ダンジョンの中を様々なイベントをかいくぐりながら最下層を目指すゲームです（1年生作品）","images/gameScreen/GekiMuzuDungeon.png","","https://drive.google.com/file/d/1BYBPzblMJDUvARWnpwzgN04JNq6-OsZ_/view?usp=sharing",""],
+["Space Shooter 2D","solo2d","2Dシューティングゲーム","2023","横スクロール型のシューティングゲーム。ボスを倒すとクリアです（1年生作品）","images/gameScreen/SpaceShooter2023.png","https://simmer.io/@BITGame/spaceshooter2d","",""],
+["タンブルハンター","solo2d","2Dシューティングゲーム","2023","襲い来るタンブルウィードをひたすらに撃つシューティングゲームです（1年生作品）","images/gameScreen/TumbleHunter.png","https://simmer.io/@BITGame/tumblerhunter","",""],
+["Super Cat Run","solo2d","横スクロールアクション","2023","ネコカンを集めてゴールにたどり着こう!!（1年生作品）","images/gameScreen/SuperCatRun.png","https://simmer.io/@BITGame/super-cat-run","",""],
+["ブロックバレッジ","solo2d","ブロック崩しと弾幕シューティング","2023","敵の攻撃を避けながらブロック崩しを行うという新感覚なゲームです（1年生作品）","images/gameScreen/BlockBarrage.png","","https://drive.google.com/file/d/1Wpa46PNhWM9IDBukQvItbncOaPADccse/view?usp=sharing",""],
+["ゲーム画面からの脱出","solo2d","脱出","2023","知らない場所で気絶させられ、ロケットで宇宙に飛ばされた主人公は無事戻れるのか（1年生作品）","images/gameScreen/GamenKara.png","","https://drive.google.com/file/d/1hX4RiEy8RE-xlFKjPHUmdGyS5Psq2VoG/view?usp=sharing",""],
+["誰でもRPG","solo2d","ターンベースRPG","2022","できることを単純にして誰でも遊べるようなRPGを作りたかった（1年生作品）","images/gameScreen/誰でもRPG.png","","https://drive.google.com/file/d/1e8lIgoXouMjZqVXswYYUChf_ydMSZs-v/view?usp=share_link",""],
+["幻想黄金郷","solo2d","縦スクロール","2022","敵の撃つ弾を避けながら、ボスを倒して、クリアを目指す（1年生作品）","images/gameScreen/幻想黄金戦士.png","","https://drive.google.com/file/d/16-cniWMtLSDJuKsozginIQGIJt54L8zE/view?usp=share_link",""],
+["Brave Survival","solo2d","アクション","2022","村を襲ってくるモンスターの襲撃部隊を倒して村を守るゲームです（1年生作品）","images/gameScreen/BraveSurvival.png","","https://drive.google.com/file/d/1CtRF6aDWeUG2UVpms6MWc6-fAbn6W79o/view?usp=share_link",""],
+["GameLabからの大脱出","solo2d","脱出","2022","部屋に閉じ込められた学生が謎を解いて脱出するゲームです（1年生作品）","images/gameScreen/GameLabEscape.png","","https://drive.google.com/file/d/1UlwDAfgTZTNc1YJQZPKWuRnTaFq-e5Oa/view?usp=sharing",""],
+["無題","solo2d","ノベル","2022","お話するだけのゲームです（1年生作品）","images/gameScreen/Mudai.png","","https://drive.google.com/file/d/1h703q5NH5rgtsqKiWBDQ_g5XoZ6XPr1n/view?usp=share_link",""],
+["Witch Divination","solo2d","シミュレーションRPG","2022","モンスターを使って勇者を倒すゲームです（1年生作品）","images/gameScreen/WitchDivination.png","","https://drive.google.com/file/d/1ZFsPnNkSG5C84VWRbT73f9LBGT6Ps4GL/view?usp=sharing",""],
+["モンスターをぶった切れ","solo2d","アクション","2022","モンスターを一定数倒してゲームをクリアせよ（1年生作品）","images/gameScreen/MonsterButtagire.png","","https://drive.google.com/file/d/16-jwoTEyJgagtRupd4iqeSLnvmx_0M5F/view?usp=sharing",""],
+["かたてまファンタジー","solo2d","ダンジョンRPG","2022","クリックだけで遊べる2DダンジョンRPG！かたてまでゲームをしたいときにどうぞ（1年生作品）","images/gameScreen/KatatemaFantasy.png","","https://drive.google.com/file/d/1XW8f9uRjf-HXq_ODchwQ01-lRoAXYraq/view?usp=sharing",""],
+["ミニゲーム屋さん!","solo2d","パーティ","2022","3つのミニゲームの詰め合わせ。1つのパソコンで複数人プレイができます（1年生作品）","images/gameScreen/MiniGameYa.jpg","","https://drive.google.com/file/d/1X9BcDbICgLScTKErDrXP4ukuomUmm830/view?usp=sharing",""],
+["Mafia Escape","solo2d","アクション","2022","マフィアが倉庫に侵入し、バレないように金を盗み出すステルスゲームです（1年生作品）","images/gameScreen/MafiaEscape.png","","https://drive.google.com/file/d/1_43m6RQ9Yelw4mK-eZSpEx3lO8cV0mD9/view?usp=sharing",""],
+["勇者RPG","solo2d","アクション","2022","HPがなくなる前にボスを倒すゲームです（1年生作品）","images/gameScreen/YuushaRPG.png","","https://drive.google.com/file/d/1toD5PO8EjEa4RKU5dsBzSplBDgLLExtn/view?usp=sharing",""],
+["トップダウンタイムアタック","solo2d","レーシング","2022","ひとりでできるタイムアタックレースゲーム（1年生作品）","images/gameScreen/TopDownTimeAttack.png","","https://drive.google.com/file/d/1K-EERw9A7yZVuF5CVHoYKrue26xf-RF0/view?usp=sharing",""],
+["Shooting Range","solo2d","シューティング","2022","FPSゲームを始める前のウォーミングアップやAIM練習用ゲームです（1年生作品）","images/gameScreen/ShootingRange.png","","https://drive.google.com/file/d/12RHyd-t5NZ_eJQcoKTJABzCjOe7CP0pw/view?usp=sharing",""],
+["NIGERO!","solo2d","アクション","2022","大男が殺人鬼を倒していくゲームです（1年生作品）","images/gameScreen/NIGERO.png","","https://drive.google.com/file/d/1ClzHrAwYge2gStfyC6GRw54N105k97TD/view?usp=sharing",""],
+["Charge Fighter","solo2d","対戦","2021","二人でできるゲームです。交互に相手の機体を壊し、勝利を目指しましょう！（1年生作品）","images/gameScreen/ChargeFighterNew.png","https://simmer.io/@BITGame/charge-fighter","",""],
+["Revival","solo2d","アクション","2021","刀を使い切る前に、このフィールドから抜け出すゲームです（1年生作品）","images/gameScreen/revival.png","https://simmer.io/@BITGame/revival","",""],
+["季節を取り戻せ！","solo2d","アクション","2021","凍え死んでしまう前に敵を倒しきって燭台に火を灯すゲーム。全9ステージ（1年生作品）","images/gameScreen/BBTS.png","https://simmer.io/@BITGame/bring-back-the-seasons","",""],
+["時短RPG","solo2d","アクション","2021","移動パート一切なし！バトルに勝利するだけで物語が進むお手軽RPG風ゲーム（1年生作品）","images/gameScreen/jitanRPG.png","https://simmer.io/@BITGame/short-rpg","",""],
+["SuperEazyWorld","solo2d","アクション","2021","スーパーマリオを少し意識したゲーム。敵キャラが出てこないので安心して集中できます（1年生作品）","images/gameScreen/SEW.png","https://simmer.io/@BITGame/super-eazy-world","",""],
+["BREAK","solo2d","アクション","2021","ドリルを操作し、モグラを倒すゲームです（1年生作品）","images/gameScreen/break.png","https://simmer.io/@BITGame/break","",""],
+["DINOSAUR GAME PAKURI","solo2d","アクション","2021","あのゲームのパクリです。はい（1年生作品）","images/gameScreen/dino.png","","gameDownload/DinosaurGamePakuri.zip",""],
+["DEEP FOREST","solo2d","アクション","2021","少女プエラが奇妙な森を探索してお母さんと自分の失ったものを取り戻すダークファンタジー（1年生作品）","images/gameScreen/deepforest.png","https://simmer.io/@BITGame/deep-forest","",""],
+["ゴール目指せ！","solo2d","アクション","2021","敵を避けながらゴールを目指そう（1年生作品）","images/gameScreen/goalmezase.png","https://simmer.io/@BITGame/goalmezase","",""],
+["ACE","solo2d","ノベル","2021","ゲームの大会で優勝を目指すノベルゲーム（1年生作品）","images/gameScreen/ace.png","https://simmer.io/@BITGame/ace","",""]
+];
+
+const CAT_LABEL = {grad:"卒業制作",team3d:"チーム制作・3D",team2d:"チーム制作・2D",solo3d:"ソロ制作・3D",solo2d:"ソロ制作・2D"};
+const CAT_GROUP = {grad:"grad",team3d:"team",team2d:"team",solo3d:"solo",solo2d:"solo"};
+
+let state = { cat:"all", genre:"all" };
+
+function uniqueGenres(){
+  const s = new Set(GAMES.map(g=>g[2]));
+  return Array.from(s).sort();
+}
+
+function renderFilters(){
+  const wrap = document.getElementById("genreFilters");
+  const genres = ["all", ...uniqueGenres()];
+  wrap.innerHTML = genres.map(g=>{
+    const label = g==="all" ? "すべてのジャンル" : g;
+    return `<div class="chip ${state.genre===g?'active':''}" data-genre="${g}">${label}</div>`;
+  }).join("");
+  wrap.querySelectorAll(".chip").forEach(chip=>{
+    chip.addEventListener("click", ()=>{
+      state.genre = chip.dataset.genre;
+      renderFilters();
+      renderResults();
+    });
+  });
+}
+
+function cardHTML(g){
+  const [title,cat,genre,year,desc,img,play,dl,size] = g;
+  const metaBits = [year+"年度"];
+  if(size) metaBits.push(size);
+  let btns = "";
+  if(play) btns += `<a class="btn btn-play" href="${play}" target="_blank" rel="noopener noreferrer">やってみる</a>`;
+  if(dl) btns += `<a class="btn btn-dl" href="${dl}" target="_blank" rel="noopener noreferrer">ダウンロード</a>`;
+  if(!play && !dl) btns = `<span class="btn btn-dl" style="opacity:.5;pointer-events:none;">準備中</span>`;
+  return `
+  <div class="card">
+    <div class="thumb">
+      <img src="${img}" alt="${title}" loading="lazy" onerror="this.style.display='none'">
+      <div class="badge">${genre}</div>
+    </div>
+    <div class="card-body">
+      <h3>${title}</h3>
+      <p class="desc">${desc}</p>
+      <div class="meta">${metaBits.map(m=>`<span>${m}</span>`).join("")}</div>
+      <div class="btn-row">${btns}</div>
+    </div>
+  </div>`;
+}
+
+function groupTitle(catKey){
+  if(catKey==="grad") return "卒業制作";
+  if(catKey==="team3d") return "チーム制作・3D";
+  if(catKey==="team2d") return "チーム制作・2D";
+  if(catKey==="solo3d") return "ソロ制作・3D";
+  if(catKey==="solo2d") return "ソロ制作・2D";
+  return catKey;
+}
+
+function renderResults(){
+  const results = document.getElementById("results");
+  let filtered = GAMES.filter(g=>{
+    const catOk = state.cat==="all" || CAT_GROUP[g[1]]===state.cat;
+    const genreOk = state.genre==="all" || g[2]===state.genre;
+    return catOk && genreOk;
+  });
+
+  document.getElementById("statTotal").textContent = GAMES.length;
+
+  if(filtered.length===0){
+    results.innerHTML = `<div class="empty-msg">該当する作品が見つかりませんでした。条件を変えてお試しください。</div>`;
+    return;
+  }
+
+  // group by sub-category, preserve order of first appearance
+  const order = [];
+  const buckets = {};
+  filtered.forEach(g=>{
+    const k = g[1];
+    if(!buckets[k]){ buckets[k]=[]; order.push(k); }
+    buckets[k].push(g);
+  });
+
+  results.innerHTML = order.map(k=>{
+    return `
+    <div class="section-title"><h2>${groupTitle(k)}</h2><span>// ${buckets[k].length}件</span></div>
+    <div class="grid">${buckets[k].map(cardHTML).join("")}</div>`;
+  }).join("");
+}
+
+document.getElementById("catTabs").addEventListener("click", (e)=>{
+  const btn = e.target.closest(".tab");
+  if(!btn) return;
+  document.querySelectorAll("#catTabs .tab").forEach(t=>t.classList.remove("active"));
+  btn.classList.add("active");
+  state.cat = btn.dataset.cat;
+  renderResults();
+});
+
+renderFilters();
+renderResults();
+</script>
+
+</body>
+</html>
