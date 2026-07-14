@@ -105,10 +105,10 @@
 
 <div class="hero">
   <div class="hero-inner">
-    <div class="eyebrow">富山情報ビジネス専門学校 &middot; ゲームクリエイター専攻</div>
+    <div class="eyebrow">富山情報ビジネス専門学校 &middot; ゲームクリエイター学科</div>
     <h1>学生が作ったゲーム、<br>ブラウザですぐ遊べます。</h1>
     <p>「やってみる」を押すとブラウザー上でゲームができます（3Dゲームは強めの回線とCPUスペックが必要です）。「ダウンロード」は.zip形式の実行ファイルです。展開してゲームタイトル.exeを実行してください。</p>
-    <p class="warn">お願い：ゲームを終了するときはWindowsボタン→Unityアイコンを右クリック→「ウインドウを閉じる」を選んでください。</p>
+    <p class="warn">お願い：ゲーム内に終了するボタンがない場合、終了するときはWindowsボタン→ゲームのアイコンを右クリック→「ウインドウを閉じる」を選んでください。</p>
     <div class="stat-row">
       <div class="stat"><b id="statTotal">0</b><span>公開作品数</span></div>
       <div class="stat"><b>4</b><span>制作カテゴリ</span></div>
@@ -119,10 +119,13 @@
 
 <div class="timeline-wrap">
   <div class="timeline">
-    <div class="step"><div class="n">1</div><p>1年生前期<br>ソロ制作（2D）</p></div>
-    <div class="step"><div class="n">2</div><p>1年生後期<br>ソロ制作（3D）</p></div>
-    <div class="step"><div class="n">3</div><p>2年生<br>チーム制作</p></div>
-    <div class="step"><div class="n">4</div><p>2年生<br>卒業制作</p></div>
+      <h1>学科のカリキュラム：</h1>
+    <div class="step"><div class="n">1</div><p>1年生前期<br>ソロ制作（2D）➡</p></div>
+    <div class="step"><div class="n">2</div><p>1年生後期<br>ソロ制作（3D）➡</p></div>
+    <div class="step"><div class="n">3</div><p>2年生<br>チーム制作　➡</p></div>
+    <div class="step"><div class="n">4</div><p>2年生<br>企業向けPRゲーム制作　➡</p></div>
+    <div class="step"><div class="n">4</div><p>2年生<br>作品ブラッシュアップ　➡</p></div>
+    <div class="step"><div class="n">4</div><p>2年生<br>卒業制作　➡</p></div>
   </div>
 </div>
 
@@ -157,16 +160,16 @@ const GAMES = [
 
 // ---- チーム制作 3D ----
 ["City Escape","team3d","シューティング","2022","攻撃してくる敵から逃げ延びたり、倒したりして、街から脱出しろ！（2年生作品）","images/gameScreen/CityEscape.png","","https://drive.google.com/file/d/1E8P0b1EhoBd6dKd5EqrQ5duJN-Q68KOO/view?usp=drive_link",""],
-["スペースシューター","team3d","シューティング","2020","機体を動かして、敵機を撃って落とす。ボスを倒したら勝ち！（2年生作品）","images/gameScreen/spaceshooter.png","https://simmer.io/@BITGame/space-fighter","gameDownload/SpaceShooter3D.zip",""],
-["FPS チーム１ USYO","team3d","シューティング","2020","武器の種類の実装を中心に制作。時間式爆弾に力を入れました（2年生作品）","images/gameScreen/fpsusyo.png","https://simmer.io/@BITGame/fps-team-1-usyo","gameDownload/PCBuildFPSUSYO.zip",""],
-["FPS チーム２ IKSH","team3d","シューティング","2020","アイテムと敵の種類の実装を中心に制作。無限湧きする敵に注意（2年生作品）","images/gameScreen/fpsiksh.png","https://simmer.io/@BITGame/fps-team-2-iksh","https://drive.google.com/file/d/18lBfYxiR1I5-VDM8-GGz3Hv3rNW3SPsw/view?usp=sharing",""],
+["スペースシューター","team3d","シューティング","2020","機体を動かして、敵機を撃って落とす。ボスを倒したら勝ち！（2年生作品）","images/gameScreen/spaceshooter.png","","gameDownload/SpaceShooter3D.zip",""],
+["FPS チーム１ USYO","team3d","シューティング","2020","武器の種類の実装を中心に制作。時間式爆弾に力を入れました（2年生作品）","images/gameScreen/fpsusyo.png","","gameDownload/PCBuildFPSUSYO.zip",""],
+["FPS チーム２ IKSH","team3d","シューティング","2020","アイテムと敵の種類の実装を中心に制作。無限湧きする敵に注意（2年生作品）","images/gameScreen/fpsiksh.png","","https://drive.google.com/file/d/18lBfYxiR1I5-VDM8-GGz3Hv3rNW3SPsw/view?usp=sharing",""],
 
 // ---- チーム制作 2D ----
 ["ChargeMan","team2d","横アクション","2024","チャージ弾で敵を倒し、不思議な世界を探索するゲームです（1年生作品）","images/gameScreen/ChargeMan.png","","https://drive.google.com/file/d/1IvRZnMgrDIMLsKYWHLnnZHSGbR9UAWVS/view?usp=sharing",""],
 ["とやまげーむ","team2d","パーティゲーム","2024","同じ形の村・町・市をくっつけて富山県を作ろう！（1年生作品）","images/gameScreen/ToyamaGame.png","","https://drive.google.com/file/d/1MShXlxGiJH8Ar94zxa2R6o5JH4UE6wHV/view?usp=sharing",""],
-["ブラックジャック","team2d","カードゲーム","2020","ブラックジャックのカードゲーム。ベットをすることも可能！（1年生作品）","images/gameScreen/blackjack.png","https://simmer.io/@BITGame/blackjack","gameDownload/BlackJack.zip",""],
+["ブラックジャック","team2d","カードゲーム","2020","ブラックジャックのカードゲーム。ベットをすることも可能！（1年生作品）","images/gameScreen/blackjack.png","","gameDownload/BlackJack.zip",""],
 ["タイムアタック","team2d","横スクロールアクション","2020","どれぐらい速くゴールまでたどり着けるか？壁に掴んで進もう（1年生作品）","images/gameScreen/timeattack.png","","gameDownload/TimeAttack.zip",""],
-["廃病院のフタリ","team2d","ノベル","2020","主人公と2人の友達のお話（1年生作品）","images/gameScreen/haibyouin00.png","https://simmer.io/@BITGame/haibyouinnofutari","gameDownload/HaibyouinNoFutari.zip",""],
+["廃病院のフタリ","team2d","ノベル","2020","主人公と2人の友達のお話（1年生作品）","images/gameScreen/haibyouin00.png","","gameDownload/HaibyouinNoFutari.zip",""],
 
 // ---- ソロ制作 3D ----
 ["Eagle Adventure","solo3d","なぞどき","2024","鷹を操作して自由にマップを飛び回るゲームです（1年生作品）","images/gameScreen/EagleAdventure.png","https://unityroom.com/games/bit-eagleadventure","",""],
@@ -175,9 +178,9 @@ const GAMES = [
 ["Robot Shooter","solo3d","シューティング","2024","ロボットの戦い（1年生作品）","images/gameScreen/robotshooter.png","https://unityroom.com/games/bit-robotshooter","",""],
 ["Crush","solo3d","カジュアル","2024","いかに壁に当たらずにゴールを目指せるかというゲームです！（1年生作品）","images/gameScreen/Crush.png","https://unityroom.com/games/bit-crush","",""],
 ["PCubes","solo3d","パズルアクション","2023","ブロックを使ってゴールを目指せ！！（1年生作品）","images/gameScreen/PCubes.png","","https://drive.google.com/file/d/11jSBeDIZx-0lEv1GniVkqRZM0jUZloIB/view?usp=sharing","35.9MB"],
-["I wanna eat watermelon","solo3d","アクションゲーム","2023","プレイヤーがスイカを操作してゴールの皿を目指そう（1年生作品）","images/gameScreen/IWannaEatWatermelon.png","https://simmer.io/@BITGame/i-wanna-eat-watermelon","",""],
-["スピード レース","solo3d","レーシング","2023","CPUと対決して１位を目指そう！（1年生作品）","images/gameScreen/SpeedRace.png","https://simmer.io/@BITGame/speed-race","",""],
-["Collect Color","solo3d","アクションゲーム","2023","バケツを操作してステージを攻略。隠しまんぼうを探してみて（1年生作品）","images/gameScreen/CollectColor.png","https://simmer.io/@BITGame/collectcolor","",""],
+["I wanna eat watermelon","solo3d","アクションゲーム","2023","プレイヤーがスイカを操作してゴールの皿を目指そう（1年生作品）","images/gameScreen/IWannaEatWatermelon.png","","",""],
+["スピード レース","solo3d","レーシング","2023","CPUと対決して１位を目指そう！（1年生作品）","images/gameScreen/SpeedRace.png","","",""],
+["Collect Color","solo3d","アクションゲーム","2023","バケツを操作してステージを攻略。隠しまんぼうを探してみて（1年生作品）","images/gameScreen/CollectColor.png","","",""],
 ["Gensokyou The Last Incident Three Egyptian Gods 3D","solo3d","弾幕シューティングゲーム","2023","弾幕シューティングを3Dで制作。立体の弾幕を避けて敵やボスを倒そう（1年生作品）","images/gameScreen/TheLastIncident.png","https://simmer.io/@BITGame/gensokyou-the-last-incident-three-egyptian-gods-3d","",""],
 ["Trinity Animals","solo3d","アクション","2023","三匹の動物たちがゴールを目指す!!スキルを駆使して道を切り開こう（1年生作品）","images/gameScreen/TrinityAnimals.png","","https://drive.google.com/file/d/1XOF4yb_TTvn9ukXJPMc8Cpg5SKHpHLiA/view?usp=sharing","35.9MB"],
 ["Flying Bird","solo3d","アクション","2023","鳥を操作してリングをくぐりましょう（1年生作品）","images/gameScreen/FlyingBird.png","","https://drive.google.com/file/d/1jYz7IgVQ9hYkFfKapGW_JTk6g2uvmt0u/view?usp=sharing","93.6MB"],
@@ -188,18 +191,18 @@ const GAMES = [
 ["ずんだFPS","solo3d","FPS","2023","ずんだもんと一緒に他のボイスロイドたちを倒すゲームになる予定でした（1年生作品）","images/gameScreen/ZFPS.png","","https://drive.google.com/file/d/1H9v8vWlwI0Flwee7WdYyjoOpLi2XM4LX/view?usp=sharing","99.2MB"],
 ["Priest","solo3d","ホラー","2023","妙な廃村からの脱出（1年生作品）","images/gameScreen/Priest.png","","https://drive.google.com/file/d/1sjQSrwUrqCfdvf3cNW6rsAn5JOiYifff/view?usp=sharing","605.4MB"],
 ["３Dチェス","solo3d","ストラテジー","2022","相手の駒を取れば駒が破壊する普通のチェスゲームです（1年生作品）","images/gameScreen/3DChess.png","","https://drive.google.com/file/d/1K-2WUXbYnRrIFhs9XMrLfh1ZO-0SJNrd/view?usp=sharing",""],
-["Zombie","solo3d","アクション","2021","制限時間内にゾンビを倒してスコアを稼ごう！（1年生作品）","images/gameScreen/Zombie.png","https://simmer.io/@BITGame/zombie","",""],
-["ホラー脱出ゲーム","solo3d","脱出","2021","各部屋のどこかに隠されているカギを見つけて部屋からの脱出を目指そう！（1年生作品）","images/gameScreen/HorrorEscapeGame.png","https://simmer.io/@BITGame/horror-escape-game","",""],
-["TARGET","solo3d","アクション","2021","三人称視点でキャラクターを動かして、ターゲットのボールを集めるゲームです！（1年生作品）","images/gameScreen/target.png","https://simmer.io/@BITGame/target","",""],
-["War of Animals","solo3d","タワーディフェンス","2020","相手のタワーに触れれば勝ち！キャラ出現にはコストが必要です（2年生作品）","images/gameScreen/warofanimals.png","https://simmer.io/@BITGame/war-of-animals","",""],
-["ロープアクション","solo3d","アクション","2020","フック付きチェーンを出してぶらさがってゴールに着地できるか挑戦（2年生作品）","images/gameScreen/ropeaction.png","https://simmer.io/@BITGame/rope-action","",""],
-["マイン〇ラ？ではない","solo3d","サンドボックス","2020","ブロックを壊して、置いて、壊して、置いていくゲームです（2年生作品）","images/gameScreen/minecraft.png","https://simmer.io/@BITGame/minecraftlike","",""],
-["泡シューター","solo3d","アクション","2020","出てくる敵を倒して、次々とステージを進んでいくゲームです（2年生作品）","images/gameScreen/bubbleShooter.png","https://simmer.io/@BITGame/bubble-shooter","",""],
-["ピンボール","solo3d","アーケード","2020","タイムアタック式ピンボールゲームです。時間まで点数いくつぐらい取れる？（2年生作品）","images/gameScreen/pinball.png","https://simmer.io/@BITGame/pinball","",""],
-["Car Attack","solo3d","タイムアタック","2020","ゴールまで何秒かかりますか？（2年生作品）","images/gameScreen/carAttack.png","https://simmer.io/@BITGame/car-attack","",""],
-["Musou","solo3d","アクション","2020","時間内に赤い敵を何人倒せるか挑戦してください！（2年生作品）","images/gameScreen/musou.png","https://simmer.io/@BITGame/musou","",""],
+["Zombie","solo3d","アクション","2021","制限時間内にゾンビを倒してスコアを稼ごう！（1年生作品）","images/gameScreen/Zombie.png","","",""],
+["ホラー脱出ゲーム","solo3d","脱出","2021","各部屋のどこかに隠されているカギを見つけて部屋からの脱出を目指そう！（1年生作品）","images/gameScreen/HorrorEscapeGame.png","","",""],
+["TARGET","solo3d","アクション","2021","三人称視点でキャラクターを動かして、ターゲットのボールを集めるゲームです！（1年生作品）","images/gameScreen/target.png","","",""],
+["War of Animals","solo3d","タワーディフェンス","2020","相手のタワーに触れれば勝ち！キャラ出現にはコストが必要です（2年生作品）","images/gameScreen/warofanimals.png","","",""],
+["ロープアクション","solo3d","アクション","2020","フック付きチェーンを出してぶらさがってゴールに着地できるか挑戦（2年生作品）","images/gameScreen/ropeaction.png","","",""],
+["マイン〇ラ？ではない","solo3d","サンドボックス","2020","ブロックを壊して、置いて、壊して、置いていくゲームです（2年生作品）","images/gameScreen/minecraft.png","","",""],
+["泡シューター","solo3d","アクション","2020","出てくる敵を倒して、次々とステージを進んでいくゲームです（2年生作品）","images/gameScreen/bubbleShooter.png","","",""],
+["ピンボール","solo3d","アーケード","2020","タイムアタック式ピンボールゲームです。時間まで点数いくつぐらい取れる？（2年生作品）","images/gameScreen/pinball.png","","",""],
+["Car Attack","solo3d","タイムアタック","2020","ゴールまで何秒かかりますか？（2年生作品）","images/gameScreen/carAttack.png","","",""],
+["Musou","solo3d","アクション","2020","時間内に赤い敵を何人倒せるか挑戦してください！（2年生作品）","images/gameScreen/musou.png","","",""],
 ["ホラーゲーム（仮）","solo3d","ホラー","2020","カギを見つけて、ここから逃げよう！出口は光っているドアです（2年生作品）","images/gameScreen/horrorgamekari.png","","https://drive.google.com/file/d/1iIG2PaaA6lb7jlRih27_edKvg7V707ym/view?usp=sharing",""],
-["PK Game","solo3d","アクション","2020","ゴール視点ペナルティキック！ゴールを止めろ！（2年生作品）","images/gameScreen/pkgame.png","https://simmer.io/@BITGame/pk","",""],
+["PK Game","solo3d","アクション","2020","ゴール視点ペナルティキック！ゴールを止めろ！（2年生作品）","images/gameScreen/pkgame.png","","",""],
 
 // ---- ソロ制作 2D ----
 ["まちばり","solo2d","カジュアル","2024","Spaceキーのみでできるゲーム。はりが重ならないようにさすゲームです（1年生作品）","images/gameScreen/machibari.png","https://simmer.io/@BITGame/machibari","",""],
@@ -248,7 +251,7 @@ const GAMES = [
 ["DINOSAUR GAME PAKURI","solo2d","アクション","2021","あのゲームのパクリです。はい（1年生作品）","images/gameScreen/dino.png","","gameDownload/DinosaurGamePakuri.zip",""],
 ["DEEP FOREST","solo2d","アクション","2021","少女プエラが奇妙な森を探索してお母さんと自分の失ったものを取り戻すダークファンタジー（1年生作品）","images/gameScreen/deepforest.png","https://simmer.io/@BITGame/deep-forest","",""],
 ["ゴール目指せ！","solo2d","アクション","2021","敵を避けながらゴールを目指そう（1年生作品）","images/gameScreen/goalmezase.png","https://simmer.io/@BITGame/goalmezase","",""],
-["ACE","solo2d","ノベル","2021","ゲームの大会で優勝を目指すノベルゲーム（1年生作品）","images/gameScreen/ace.png","https://simmer.io/@BITGame/ace","",""]
+["ACE","solo2d","ノベル","2021","ゲームの大会で優勝を目指すノベルゲーム（1年生作品）","images/gameScreen/ace.png","","",""]
 ];
 
 const CAT_LABEL = {grad:"卒業制作",team3d:"チーム制作・3D",team2d:"チーム制作・2D",solo3d:"ソロ制作・3D",solo2d:"ソロ制作・2D"};
@@ -305,7 +308,7 @@ function cardHTML(g){
   let btns = "";
   if(play) btns += `<a class="btn btn-play" href="${play}" target="_blank" rel="noopener noreferrer">やってみる</a>`;
   if(dl) btns += `<a class="btn btn-dl" href="${dl}" target="_blank" rel="noopener noreferrer">ダウンロード</a>`;
-  if(!play && !dl) btns = `<span class="btn btn-dl" style="opacity:.5;pointer-events:none;">準備中</span>`;
+  if(!play && !dl) btns = `<span class="btn btn-dl" style="opacity:.5;pointer-events:none;">紹介のみ</span>`;
   return `
   <div class="card">
     <div class="thumb">
