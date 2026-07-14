@@ -97,6 +97,7 @@
   <div class="logo"><span class="dot"></span>BIT GAME STATION</div>
   <div class="tabs" id="catTabs">
     <button class="tab active" data-cat="all">すべて</button>
+     <button class="tab" data-cat="steam">STEAMリリース</button>
     <button class="tab" data-cat="grad">卒業制作</button>
     <button class="tab" data-cat="team">チーム制作</button>
     <button class="tab" data-cat="solo">ソロ制作</button>
@@ -119,13 +120,13 @@
 
 <div class="timeline-wrap">
   <div class="timeline">
-      <h1>学科のカリキュラム：</h1>
-    <div class="step"><div class="n">1</div><p>1年生前期<br>ソロ制作（2D）➡</p></div>
-    <div class="step"><div class="n">2</div><p>1年生後期<br>ソロ制作（3D）➡</p></div>
-    <div class="step"><div class="n">3</div><p>2年生<br>チーム制作　➡</p></div>
-    <div class="step"><div class="n">4</div><p>2年生<br>企業向けPRゲーム制作　➡</p></div>
-    <div class="step"><div class="n">4</div><p>2年生<br>作品ブラッシュアップ　➡</p></div>
-    <div class="step"><div class="n">4</div><p>2年生<br>卒業制作　➡</p></div>
+      <h1>カリキュラム：</h1>
+    <div class="step"><div class="n">1</div><p>1年生前期<br>個人制作（2D）➡</p></div>
+    <div class="step"><div class="n">2</div><p>1年生後期<br>個人制作（3D）➡</p></div>
+    <div class="step"><div class="n">3</div><p>2年生前期<br>チーム制作　➡</p></div>
+    <div class="step"><div class="n">4</div><p>2年生後期<br>地域連携ゲーム制作　➡</p></div>
+    <div class="step"><div class="n">5</div><p>3年生前期<br>作品ブラッシュアップ　➡</p></div>
+    <div class="step"><div class="n">6</div><p>3年生後期<br>卒業制作　➡</p></div>
   </div>
 </div>
 
@@ -144,32 +145,32 @@
 </footer>
 
 <script>
-/* category: grad / team3d / team2d / solo3d / solo2d
+/* category: steam/ grad / team3d / team2d / solo3d / solo2d
    fields: [title, category, genre, year, desc, img, playUrl, dlUrl, size] */
 const GAMES = [
 // ---- 卒業制作 ----
-["いみず雫のライバー生活","grad","シミュレーション","2023","射水市活性化のためにVtuberいみず雫ちゃんが自分磨きをして頑張ります！","images/gameScreen/SizukuLiverSeikatsu.png","","https://drive.google.com/file/d/1ANjCvXjpvch1V5QI8BlxRCtH6DJhVuk8/view?usp=sharing","56.3MB"],
-["いみずしずくのファッションショー!","grad","シミュレーション","2023","Vtuberいみず雫は人気者になるためにファッションショーに出ます！","images/gameScreen/SizukuFashion.png","","https://drive.google.com/file/d/1_rHD2Uqpu1dbXmi75iLPHzSskBtdcaEQ/view?usp=sharing","47.5MB"],
-["いみず雫新聞～新聞始めました～","grad","ボードゲーム","2023","射水市の新聞作成のためにVtuber雫ちゃんはネタを求める！","images/gameScreen/SizukuNewspaper.png","","https://drive.google.com/file/d/1K5RxFNUxCZ9dXPIAsM41RP3dkKjHg5Ld/view?usp=sharing","58.5MB"],
-["キララかしずくナビ","grad","シミュレーション","2023","Vtuberいみず雫に誘われてあなたは射水市を回ることになった！","images/gameScreen/SizukuNavi.png","","https://drive.google.com/file/d/1geoGqlVSohWMfiTRLM_4Tv3DYnyJhWgN/view?usp=sharing","120.4MB"],
+["いみず雫のライバー生活","grad","シミュレーション","2023","射水市活性化のためにVtuberいみず雫ちゃんが自分磨きをして頑張ります！","images/gameScreen/SizukuLiverSeikatsu.png","","https://drive.google.com/file/d/1ANjCvXjpvch1V5QI8BlxRCtH6DJhVuk8/view?usp=sharing","56MB"],
+["いみずしずくのファッションショー!","grad","シミュレーション","2023","Vtuberいみず雫は人気者になるためにファッションショーに出ます！","images/gameScreen/SizukuFashion.png","","https://drive.google.com/file/d/1_rHD2Uqpu1dbXmi75iLPHzSskBtdcaEQ/view?usp=sharing","47MB"],
+["いみず雫新聞～新聞始めました～","grad","ボードゲーム","2023","射水市の新聞作成のためにVtuber雫ちゃんはネタを求める！","images/gameScreen/SizukuNewspaper.png","","https://drive.google.com/file/d/1K5RxFNUxCZ9dXPIAsM41RP3dkKjHg5Ld/view?usp=sharing","58MB"],
+["キララかしずくナビ","grad","シミュレーション","2023","Vtuberいみず雫に誘われてあなたは射水市を回ることになった！","images/gameScreen/SizukuNavi.png","","https://drive.google.com/file/d/1geoGqlVSohWMfiTRLM_4Tv3DYnyJhWgN/view?usp=sharing","120MB"],
 ["いみず雫のワクワク射水市クイズ","grad","クイズ","2023","射水市クイズ！あなたは全部正解できますか？","images/gameScreen/ImizuQuiz.png","","https://drive.google.com/file/d/1zfdbHBpTcBXeRuUmBlAM6nxj2VmiWjdE/view?usp=sharing","35.9MB"],
-["Sizuku Racing","grad","レーシング","2022","Vtuberいみず雫は人気者になるためにレースに出るってよ！","images/gameScreen/SizukuRacing.png","","https://drive.google.com/file/d/1k1MMoxxLnQ5jvJKR5YXZlo5FEIg06HD9/view?usp=share_link","176.1MB"],
-["ブルーライバー","grad","シミュレーション","2022","Vtuberいみず雫のマネージャーとして彼女の射水市のPR活動をサポートしましょう！","images/gameScreen/BlueLiver.png","","https://drive.google.com/file/d/1R_1MKtRN6CjD5kamV_N4KJ1d5T4ZlPLv/view?usp=sharing","96.7MB"],
-["射水雫市長になります！","grad","2Dアクション","2022","特産品が暴れまわっている！市長いみず雫、なんとかしてください！","images/gameScreen/Shichou.png","","https://drive.google.com/file/d/1JosV9K0Sz1T8jtKMUJCO53Gz1f-5S58n/view?usp=sharing","33.5MB"],
-["富山クエスト","grad","RPG","2021","富山県は魔王に支配されてしまった！ヒーローキトキトクンとその仲間たちに運命が託された。","images/gameScreen/tq.png","","https://drive.google.com/file/d/1rNerfJBywTIUK50trglaWLOyhLc_Vp2w/view?usp=sharing","98.5MB"],
+["Sizuku Racing","grad","レーシング","2022","Vtuberいみず雫は人気者になるためにレースに出るってよ！","images/gameScreen/SizukuRacing.png","","https://drive.google.com/file/d/1k1MMoxxLnQ5jvJKR5YXZlo5FEIg06HD9/view?usp=share_link","176MB"],
+["ブルーライバー","grad","シミュレーション","2022","Vtuberいみず雫のマネージャーとして彼女の射水市のPR活動をサポートしましょう！","images/gameScreen/BlueLiver.png","","https://drive.google.com/file/d/1R_1MKtRN6CjD5kamV_N4KJ1d5T4ZlPLv/view?usp=sharing","96MB"],
+["射水雫市長になります！","grad","2Dアクション","2022","特産品が暴れまわっている！市長いみず雫、なんとかしてください！","images/gameScreen/Shichou.png","","https://drive.google.com/file/d/1JosV9K0Sz1T8jtKMUJCO53Gz1f-5S58n/view?usp=sharing","33MB"],
+["富山クエスト","grad","RPG","2021","富山県は魔王に支配されてしまった！ヒーローキトキトクンとその仲間たちに運命が託された。","images/gameScreen/tq.png","","https://drive.google.com/file/d/1cYGXW6Ym9Xp29thaXG1fifSO9vmUKRIR/view?usp=sharing","98MB"],
 
 // ---- チーム制作 3D ----
 ["City Escape","team3d","シューティング","2022","攻撃してくる敵から逃げ延びたり、倒したりして、街から脱出しろ！（2年生作品）","images/gameScreen/CityEscape.png","","https://drive.google.com/file/d/1E8P0b1EhoBd6dKd5EqrQ5duJN-Q68KOO/view?usp=drive_link",""],
-["スペースシューター","team3d","シューティング","2020","機体を動かして、敵機を撃って落とす。ボスを倒したら勝ち！（2年生作品）","images/gameScreen/spaceshooter.png","","gameDownload/SpaceShooter3D.zip",""],
-["FPS チーム１ USYO","team3d","シューティング","2020","武器の種類の実装を中心に制作。時間式爆弾に力を入れました（2年生作品）","images/gameScreen/fpsusyo.png","","gameDownload/PCBuildFPSUSYO.zip",""],
-["FPS チーム２ IKSH","team3d","シューティング","2020","アイテムと敵の種類の実装を中心に制作。無限湧きする敵に注意（2年生作品）","images/gameScreen/fpsiksh.png","","https://drive.google.com/file/d/18lBfYxiR1I5-VDM8-GGz3Hv3rNW3SPsw/view?usp=sharing",""],
+["スペースシューター","team3d","シューティング","2020","機体を動かして、敵機を撃って落とす。ボスを倒したら勝ち！（2年生作品）","images/gameScreen/spaceshooter.png","","https://drive.google.com/file/d/1AamzgCg1QHhklkzPoCyfWta3KTVKulUe/view?usp=sharing",""],
+["FPS チーム１ USYO","team3d","シューティング","2020","武器の種類の実装を中心に制作。時間式爆弾に力を入れました（2年生作品）","images/gameScreen/fpsusyo.png","","https://drive.google.com/file/d/1p6lchEOkWd2cK1yzGG4UpYUebGuR13iI/view?usp=sharing",""],
+["FPS チーム２ IKSH","team3d","シューティング","2020","アイテムと敵の種類の実装を中心に制作。無限湧きする敵に注意（2年生作品）","images/gameScreen/fpsiksh.png","","https://drive.google.com/file/d/1f4CtbW8jK2yIaTEe7iSTi7k6dyCjWurg/view?usp=sharing",""],
 
 // ---- チーム制作 2D ----
 ["ChargeMan","team2d","横アクション","2024","チャージ弾で敵を倒し、不思議な世界を探索するゲームです（1年生作品）","images/gameScreen/ChargeMan.png","","https://drive.google.com/file/d/1IvRZnMgrDIMLsKYWHLnnZHSGbR9UAWVS/view?usp=sharing",""],
 ["とやまげーむ","team2d","パーティゲーム","2024","同じ形の村・町・市をくっつけて富山県を作ろう！（1年生作品）","images/gameScreen/ToyamaGame.png","","https://drive.google.com/file/d/1MShXlxGiJH8Ar94zxa2R6o5JH4UE6wHV/view?usp=sharing",""],
-["ブラックジャック","team2d","カードゲーム","2020","ブラックジャックのカードゲーム。ベットをすることも可能！（1年生作品）","images/gameScreen/blackjack.png","","gameDownload/BlackJack.zip",""],
-["タイムアタック","team2d","横スクロールアクション","2020","どれぐらい速くゴールまでたどり着けるか？壁に掴んで進もう（1年生作品）","images/gameScreen/timeattack.png","","gameDownload/TimeAttack.zip",""],
-["廃病院のフタリ","team2d","ノベル","2020","主人公と2人の友達のお話（1年生作品）","images/gameScreen/haibyouin00.png","","gameDownload/HaibyouinNoFutari.zip",""],
+["ブラックジャック","team2d","カードゲーム","2020","ブラックジャックのカードゲーム。ベットをすることも可能！（1年生作品）","images/gameScreen/blackjack.png","","https://drive.google.com/file/d/1gDJD0bWtJJ_qEpPjjcqwlk8fZIWf8IBm/view?usp=sharing",""],
+["タイムアタック","team2d","横スクロールアクション","2020","どれぐらい速くゴールまでたどり着けるか？壁に掴んで進もう（1年生作品）","images/gameScreen/timeattack.png","","https://drive.google.com/file/d/1iN_S7qG8uSOcZn78W-Var8A-uzTnx_6x/view?usp=sharing",""],
+["廃病院のフタリ","team2d","ノベル","2020","主人公と2人の友達のお話（1年生作品）","images/gameScreen/haibyouin00.png","","https://drive.google.com/file/d/1YhUqNZQ4WQHWJ2gbqn4hK-cEddrlRTCz/view?usp=sharing",""],
 
 // ---- ソロ制作 3D ----
 ["Eagle Adventure","solo3d","なぞどき","2024","鷹を操作して自由にマップを飛び回るゲームです（1年生作品）","images/gameScreen/EagleAdventure.png","https://unityroom.com/games/bit-eagleadventure","",""],
@@ -201,7 +202,7 @@ const GAMES = [
 ["ピンボール","solo3d","アーケード","2020","タイムアタック式ピンボールゲームです。時間まで点数いくつぐらい取れる？（2年生作品）","images/gameScreen/pinball.png","","",""],
 ["Car Attack","solo3d","タイムアタック","2020","ゴールまで何秒かかりますか？（2年生作品）","images/gameScreen/carAttack.png","","",""],
 ["Musou","solo3d","アクション","2020","時間内に赤い敵を何人倒せるか挑戦してください！（2年生作品）","images/gameScreen/musou.png","","",""],
-["ホラーゲーム（仮）","solo3d","ホラー","2020","カギを見つけて、ここから逃げよう！出口は光っているドアです（2年生作品）","images/gameScreen/horrorgamekari.png","","https://drive.google.com/file/d/1iIG2PaaA6lb7jlRih27_edKvg7V707ym/view?usp=sharing",""],
+["ホラーゲーム（仮）","solo3d","ホラー","2020","カギを見つけて、ここから逃げよう！出口は光っているドアです（2年生作品）","images/gameScreen/horrorgamekari.png","","https://drive.google.com/file/d/1FgmS9ecJRqAqvywCp93X8a-EvKAZyIbZ/view?usp=sharing",""],
 ["PK Game","solo3d","アクション","2020","ゴール視点ペナルティキック！ゴールを止めろ！（2年生作品）","images/gameScreen/pkgame.png","","",""],
 
 // ---- ソロ制作 2D ----
@@ -254,8 +255,8 @@ const GAMES = [
 ["ACE","solo2d","ノベル","2021","ゲームの大会で優勝を目指すノベルゲーム（1年生作品）","images/gameScreen/ace.png","","",""]
 ];
 
-const CAT_LABEL = {grad:"卒業制作",team3d:"チーム制作・3D",team2d:"チーム制作・2D",solo3d:"ソロ制作・3D",solo2d:"ソロ制作・2D"};
-const CAT_GROUP = {grad:"grad",team3d:"team",team2d:"team",solo3d:"solo",solo2d:"solo"};
+const CAT_LABEL = {steam: "STEAMリリース", grad:"卒業制作",team3d:"チーム制作・3D",team2d:"チーム制作・2D",solo3d:"ソロ制作・3D",solo2d:"ソロ制作・2D"};
+const CAT_GROUP = {steam: "STEAM", grad:"grad",team3d:"team",team2d:"team",solo3d:"solo",solo2d:"solo"};
 
 let state = { cat:"all", genre:"all", year:"all" };
 
@@ -325,6 +326,7 @@ function cardHTML(g){
 }
 
 function groupTitle(catKey){
+  if(catKey==="steam") return "STEAMリリース";
   if(catKey==="grad") return "卒業制作";
   if(catKey==="team3d") return "チーム制作・3D";
   if(catKey==="team2d") return "チーム制作・2D";
