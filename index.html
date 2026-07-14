@@ -126,6 +126,7 @@
   </div>
 </div>
 
+<div class="filters" id="yearFilters"></div>
 <div class="filters" id="genreFilters"></div>
 
 <div id="results"></div>
@@ -253,11 +254,16 @@ const GAMES = [
 const CAT_LABEL = {grad:"卒業制作",team3d:"チーム制作・3D",team2d:"チーム制作・2D",solo3d:"ソロ制作・3D",solo2d:"ソロ制作・2D"};
 const CAT_GROUP = {grad:"grad",team3d:"team",team2d:"team",solo3d:"solo",solo2d:"solo"};
 
-let state = { cat:"all", genre:"all" };
+let state = { cat:"all", genre:"all", year:"all" };
 
 function uniqueGenres(){
   const s = new Set(GAMES.map(g=>g[2]));
   return Array.from(s).sort();
+}
+
+function uniqueYears(){
+  const s = new Set(GAMES.map(g=>g[3]));
+  return Array.from(s).sort((a,b)=>b-a); // newest first
 }
 
 function renderFilters(){
@@ -271,6 +277,22 @@ function renderFilters(){
     chip.addEventListener("click", ()=>{
       state.genre = chip.dataset.genre;
       renderFilters();
+      renderResults();
+    });
+  });
+}
+
+function renderYearFilters(){
+  const wrap = document.getElementById("yearFilters");
+  const years = ["all", ...uniqueYears()];
+  wrap.innerHTML = years.map(y=>{
+    const label = y==="all" ? "すべての年度" : y+"年度";
+    return `<div class="chip ${state.year===y?'active':''}" data-year="${y}">${label}</div>`;
+  }).join("");
+  wrap.querySelectorAll(".chip").forEach(chip=>{
+    chip.addEventListener("click", ()=>{
+      state.year = chip.dataset.year;
+      renderYearFilters();
       renderResults();
     });
   });
@@ -313,7 +335,8 @@ function renderResults(){
   let filtered = GAMES.filter(g=>{
     const catOk = state.cat==="all" || CAT_GROUP[g[1]]===state.cat;
     const genreOk = state.genre==="all" || g[2]===state.genre;
-    return catOk && genreOk;
+    const yearOk = state.year==="all" || g[3]===state.year;
+    return catOk && genreOk && yearOk;
   });
 
   document.getElementById("statTotal").textContent = GAMES.length;
@@ -349,6 +372,7 @@ document.getElementById("catTabs").addEventListener("click", (e)=>{
 });
 
 renderFilters();
+renderYearFilters();
 renderResults();
 </script>
 
